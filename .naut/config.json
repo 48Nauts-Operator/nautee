@@ -1,0 +1,20 @@
+{
+  "baseDir": "/Users/jarvis/0200_projects/dev/000_Active/nautee",
+  "systemInfo": {
+    "os": "Darwin",
+    "platform": "darwin",
+    "arch": "arm64",
+    "version": "v20.18.3"
+  },
+  "paths": {
+    "conversations": "/Users/jarvis/0200_projects/dev/000_Active/nautee/.naut/conversations",
+    "chats": "/Users/jarvis/0200_projects/dev/000_Active/nautee/.naut/chats",
+    "contexts": "/Users/jarvis/0200_projects/dev/000_Active/nautee/.naut/contexts",
+    "temp": "/Users/jarvis/0200_projects/dev/000_Active/nautee/.naut/temp"
+  },
+  "settings": {
+    "chatHistorySyncInterval": 5,
+    "maxBackups": 5,
+    "logLevel": "info"
+  }
+}
