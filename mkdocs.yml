@@ -1,4 +1,5 @@
 site_name: Nautee Docs
+site_url: https://your-username.github.io/your-repo/
 theme:
   name: material
 nav:
