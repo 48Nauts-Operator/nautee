@@ -48,7 +48,7 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.keys
   - pymdownx.emoji:
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_generator: "materialx.emoji.to_svg"
 
 plugins:
   - search
