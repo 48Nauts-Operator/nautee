@@ -1,0 +1,28 @@
+name: Auto-Doc External: 137docs
+
+on:
+  schedule:
+    - cron: '0 7 * * *'  # Every day at 07:00 UTC
+  workflow_dispatch:      # Optional: manual run
+
+jobs:
+  autodoc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Nautee (this repo)
+        uses: actions/checkout@v3
+
+      - name: Clone 137docs
+        env:
+          GH_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+        run: |
+          git clone https://$GH_TOKEN@github.com/your-org/137docs.git repos/137docs
+
+      - name: Install dependencies
+        run: pip install anthropic python-dotenv
+
+      - name: Run autodoc on 137docs
+        run: python tools/autodoc.py repos/137docs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
