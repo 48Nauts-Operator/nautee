@@ -1,0 +1,852 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>autodoc tools autodoc py 2025 05 31T16 04 15 - Nautee Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#auto-documentation-generator" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Nautee Docs" class="md-header__button md-logo" aria-label="Nautee Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nautee Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              autodoc tools autodoc py 2025 05 31T16 04 15
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Nautee Docs" class="md-nav__button md-logo" aria-label="Nautee Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Nautee Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    AutoDocs
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AutoDocs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autodoc_tools_autodoc_py_2025-05-31T16-11-45/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Autodoc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autodoc_tools_claude_folder_review_py_2025-05-31T16-12-08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Claude Folder Review
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autodoc_tools_claude_review_py_2025-05-31T16-12-40/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Claude Review
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autodoc_tools_changelog_py_2025-05-31T16-13-02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autodoc_tools_claude_folder_review_batched_py_2025-05-31T16-13-29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Batched Review
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependencies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command Line
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Output Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-naming-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Naming Convention
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing Logic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Processing Logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Discovery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index Creation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-implementation-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Implementation Details
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Implementation Details">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ai-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-pages-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      GitHub Pages Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cicd-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      CI/CD Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<!--
+This documentation was auto-generated by Claude on 2025-05-31T16-04-15.
+Source file: ./tools/autodoc.py
+-->
+
+<h1 id="auto-documentation-generator">Auto-Documentation Generator</h1>
+<p>This Python script automatically generates professional documentation for Python codebases using Anthropic's Claude AI. It recursively processes Python files in a target directory and creates comprehensive Markdown documentation.</p>
+<h2 id="overview">Overview</h2>
+<p>The script leverages Claude's natural language processing capabilities to analyze Python source code and generate clear, professional documentation in Markdown format. It's designed for automated documentation workflows and integrates seamlessly with GitHub Pages.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Recursive File Processing</strong>: Automatically discovers and processes all Python files in a target directory</li>
+<li><strong>AI-Powered Documentation</strong>: Uses Claude AI to generate professional, technical documentation</li>
+<li><strong>GitHub Pages Ready</strong>: Creates <code>.nojekyll</code> file and HTML index for GitHub Pages deployment</li>
+<li><strong>Organized Output</strong>: Generates timestamped documentation files with a centralized index</li>
+<li><strong>Error Handling</strong>: Gracefully handles processing errors and continues with remaining files</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<h3 id="dependencies">Dependencies</h3>
+<pre><code class="language-python">import os
+import sys
+import anthropic
+from dotenv import load_dotenv
+from datetime import datetime
+</code></pre>
+<h3 id="environment-variables">Environment Variables</h3>
+<ul>
+<li><code>ANTHROPIC_API_KEY</code>: Your Anthropic API key (required)</li>
+<li><code>ANTHROPIC_MODEL</code>: Claude model to use (optional, defaults to "claude-sonnet-4-20250514")</li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<p>The script uses environment variables loaded from a <code>.env</code> file:</p>
+<pre><code class="language-bash">ANTHROPIC_API_KEY=your_api_key_here
+ANTHROPIC_MODEL=claude-sonnet-4-20250514  # Optional
+</code></pre>
+<h2 id="usage">Usage</h2>
+<h3 id="command-line">Command Line</h3>
+<pre><code class="language-bash">python script.py [target_path]
+</code></pre>
+<p><strong>Parameters:</strong>
+- <code>target_path</code> (optional): Directory to scan for Python files. Defaults to current directory (<code>.</code>)</p>
+<h3 id="examples">Examples</h3>
+<pre><code class="language-bash"># Document current directory
+python script.py
+
+# Document specific directory
+python script.py /path/to/your/project
+
+# Document relative path
+python script.py ./src
+</code></pre>
+<h2 id="output-structure">Output Structure</h2>
+<p>The script creates a <code>docs/</code> directory with the following structure:</p>
+<pre><code>docs/
+├── .nojekyll                    # GitHub Pages configuration
+├── index.html                   # HTML landing page
+├── index.md                     # Markdown index of all documentation
+└── autodoc_[file]_[timestamp].md # Generated documentation files
+</code></pre>
+<h3 id="file-naming-convention">File Naming Convention</h3>
+<p>Documentation files follow this pattern:</p>
+<pre><code>autodoc_{relative_path}_{timestamp}.md
+</code></pre>
+<p>Where:
+- <code>{relative_path}</code>: Source file path with <code>/</code> and <code>.</code> replaced by <code>_</code>
+- <code>{timestamp}</code>: Generation timestamp in <code>YYYY-MM-DDTHH-MM-SS</code> format</p>
+<h2 id="processing-logic">Processing Logic</h2>
+<h3 id="file-discovery">File Discovery</h3>
+<ol>
+<li><strong>Recursive Scanning</strong>: Uses <code>os.walk()</code> to traverse directory tree</li>
+<li><strong>File Filtering</strong>: Includes only <code>.py</code> files, excluding:</li>
+<li>Test files (starting with <code>test_</code>)</li>
+<li><code>__init__.py</code> files</li>
+<li><strong>Path Resolution</strong>: Converts absolute paths to relative paths for clean output</li>
+</ol>
+<h3 id="documentation-generation">Documentation Generation</h3>
+<ol>
+<li><strong>Source Code Reading</strong>: Reads Python file content</li>
+<li><strong>AI Processing</strong>: Sends code to Claude with professional documentation prompt</li>
+<li><strong>Markdown Generation</strong>: Receives structured Markdown documentation</li>
+<li><strong>File Output</strong>: Saves documentation with metadata header</li>
+</ol>
+<h3 id="index-creation">Index Creation</h3>
+<ul>
+<li><strong>HTML Index</strong>: Creates user-friendly landing page with styling</li>
+<li><strong>Markdown Index</strong>: Generates linked list of all documented files</li>
+<li><strong>GitHub Pages Support</strong>: Ensures compatibility with GitHub Pages rendering</li>
+</ul>
+<h2 id="error-handling">Error Handling</h2>
+<p>The script implements robust error handling:</p>
+<ul>
+<li><strong>File Access Errors</strong>: Continues processing if individual files cannot be read</li>
+<li><strong>API Errors</strong>: Logs Claude API errors and continues with remaining files</li>
+<li><strong>Missing Files</strong>: Exits gracefully if no Python files are found</li>
+<li><strong>Directory Creation</strong>: Safely creates output directory if it doesn't exist</li>
+</ul>
+<h2 id="technical-implementation-details">Technical Implementation Details</h2>
+<h3 id="ai-integration">AI Integration</h3>
+<pre><code class="language-python">response = client.messages.create(
+    model=model,
+    max_tokens=1500,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt}]
+)
+</code></pre>
+<ul>
+<li><strong>Token Limit</strong>: Set to 1500 tokens for comprehensive documentation</li>
+<li><strong>Professional Prompt</strong>: Instructs Claude to generate technical documentation</li>
+<li><strong>Error Recovery</strong>: Handles API failures gracefully</li>
+</ul>
+<h3 id="github-pages-optimization">GitHub Pages Optimization</h3>
+<ul>
+<li><strong><code>.nojekyll</code> File</strong>: Prevents Jekyll processing on GitHub Pages</li>
+<li><strong>HTML Landing Page</strong>: Provides user-friendly entry point</li>
+<li><strong>Timestamp Tracking</strong>: Shows last update time for freshness indication</li>
+</ul>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>API Key Security</strong>: Store API keys in <code>.env</code> file, never commit to version control</li>
+<li><strong>Rate Limiting</strong>: Be mindful of API rate limits when processing large codebases</li>
+<li><strong>Output Review</strong>: Review generated documentation for accuracy and completeness</li>
+<li><strong>Version Control</strong>: Consider gitignoring the <code>docs/</code> directory if regenerating frequently</li>
+</ol>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li><strong>File Size</strong>: Very large Python files may exceed Claude's context window</li>
+<li><strong>Token Limit</strong>: Complex files may require higher token limits for complete documentation</li>
+<li><strong>API Dependency</strong>: Requires active internet connection and valid Anthropic API access</li>
+<li><strong>Language Support</strong>: Currently processes only Python files (<code>.py</code> extension)</li>
+</ul>
+<h2 id="integration-examples">Integration Examples</h2>
+<h3 id="cicd-pipeline">CI/CD Pipeline</h3>
+<pre><code class="language-yaml"># GitHub Actions example
+- name: Generate Documentation
+  run: |
+    pip install anthropic python-dotenv
+    python autodoc.py ./src
+
+- name: Deploy to GitHub Pages
+  uses: peaceiris/actions-gh-pages@v3
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    publish_dir: ./docs
+</code></pre>
+<p>This documentation generator streamlines the process of maintaining up-to-date, professional documentation for Python projects while leveraging the power of AI for consistent, high-quality output.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
