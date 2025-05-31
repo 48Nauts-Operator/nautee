@@ -45,9 +45,25 @@ Code:
 else:
     # Try Git diff between origin/main and HEAD
     try:
-        print("📦 Trying `git diff origin/main...HEAD`...")
-        diff = subprocess.check_output(["git", "diff", "origin/main...HEAD"]).decode()
-        name_part = "git_diff_origin_main"
+    print("📦 Trying `git diff origin/main...HEAD`...")
+    diff = subprocess.check_output(["git", "diff", "origin/main...HEAD"]).decode()
+    name_part = "git_diff_origin_main"
+
+except subprocess.CalledProcessError:
+    print("⚠️ `origin/main` not found. Trying HEAD^...")
+    try:
+        diff = subprocess.check_output(["git", "diff", "HEAD^"]).decode()
+        name_part = "git_diff_head_prev"
+    except subprocess.CalledProcessError:
+        print("❌ Git diff failed. No usable revision history.")
+        # Optional: still output a Markdown stub so your CI doesn't fail
+        review_text = "# Claude Review\n\n⚠️ No diff available — skipping review."
+        timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
+        out_path = f"output/claude_review_nodiff_{timestamp}.md"
+        with open(out_path, "w") as f:
+            f.write(review_text)
+        print(f"📝 Stub review saved to {out_path}")
+        sys.exit(0)
 
     except subprocess.CalledProcessError as e:
         print("⚠️ `origin/main` not found. Falling back to `git diff HEAD^`.")
