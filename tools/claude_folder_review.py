@@ -1,3 +1,12 @@
+# =========================
+# Review a single file or a git diff
+# Author: André Wolke
+# Date: 2025-05-31
+# Version: 1.0.0
+# Description: This script reviews a folder of code using Claude.
+# It can be used to review a folder of code.
+# =========================
+
 import os
 import sys
 import anthropic

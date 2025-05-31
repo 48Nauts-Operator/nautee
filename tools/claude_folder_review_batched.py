@@ -1,3 +1,11 @@
+# =========================
+# This script reviews a folder of code using Claude.
+# Author: André Wolke
+# Date: 2025-05-31
+# Version: 1.0.0
+# Description: This script reviews a folder of code using Claude.
+# It will batch the files to stay within ~10k token limits.
+# =========================
 import os
 import sys
 import anthropic
