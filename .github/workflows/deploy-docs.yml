@@ -1,10 +1,12 @@
 name: Commit Auto-Generated Docs
 
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'  # Every day at 6am UTC
+  workflow_dispatch:      # Optional: manual run button    
   push:
     branches:
-      - main
+    - main
 
 jobs:
   commit-docs:
