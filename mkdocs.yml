@@ -1,12 +1,79 @@
 site_name: Nautee Docs
-site_url: https://your-username.github.io/your-repo/
 theme:
   name: material
+  palette:
+    - scheme: slate  # enables dark mode
+      primary: blue
+      accent: green
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: blue
+      accent: green
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.top
+    - content.code.copy
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.snippets
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.keys
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: true
+
 nav:
   - Home: index.md
+
+  - AI Docs:
+      - 📝 Changelog (Generated): tools_changelog_py.md
+      - 🧠 Claude Folder Review: tools_claude_folder_review_py.md
+      - 📦 Claude Folder Review Batched: tools_claude_folder_review_batched_py.md
+      - 💬 Claude Review (File or Git): tools_claude_review_py.md
+
   - AutoDocs:
-      - Autodoc: tools_autodoc.md
-      - Changelog: tools_changelog.md
-      - Claude Folder Review: tools_claude_folder_review.md
-      - Claude Folder Review Batched: tools_claude_folder_review_batched.md
-      - Claude Review: tools_claude_review.md
+      - 📄 generate_docs: generate_docs_py.md
+      - 🧾 Autodoc Script: tools_autodoc_py.md
+
+  - Internal:
+      - 📄 Concept: internal/auto-dev-loop-concept.md
+ 
+  - API Docs:
+      - 📄 Autodoc: tools_autodoc_py.md
+      - 🧾 Changelog (Module): tools_changelog_py.md
