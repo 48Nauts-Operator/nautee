@@ -5,19 +5,21 @@ from dotenv import load_dotenv
 from datetime import datetime
 import subprocess
 
-# Load Claude config
+# Load Claude API setup
 load_dotenv()
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 model = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-20250514")
 
-# Output folder
+# Ensure output folder exists
 os.makedirs("output", exist_ok=True)
 
-# Determine mode: manual file review or Git diff
+# Check for file arguments
 file_paths = sys.argv[1:]
 
+# =========================
+# MODE 1: Manual file review
+# =========================
 if file_paths:
-    # Manual file review
     combined_code = ""
     for file_path in file_paths:
         if not os.path.exists(file_path):
@@ -42,37 +44,29 @@ Code:
         os.path.basename(p).replace(".", "_") for p in file_paths
     )
 
+# =========================
+# MODE 2: Git diff review
+# =========================
 else:
-    # Try Git diff between origin/main and HEAD
     try:
-    print("📦 Trying `git diff origin/main...HEAD`...")
-    diff = subprocess.check_output(["git", "diff", "origin/main...HEAD"]).decode()
-    name_part = "git_diff_origin_main"
-
-except subprocess.CalledProcessError:
-    print("⚠️ `origin/main` not found. Trying HEAD^...")
-    try:
-        diff = subprocess.check_output(["git", "diff", "HEAD^"]).decode()
-        name_part = "git_diff_head_prev"
+        print("📦 Trying `git diff origin/main...HEAD`...")
+        diff = subprocess.check_output(["git", "diff", "origin/main...HEAD"]).decode()
+        name_part = "git_diff_origin_main"
     except subprocess.CalledProcessError:
-        print("❌ Git diff failed. No usable revision history.")
-        # Optional: still output a Markdown stub so your CI doesn't fail
-        review_text = "# Claude Review\n\n⚠️ No diff available — skipping review."
-        timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
-        out_path = f"output/claude_review_nodiff_{timestamp}.md"
-        with open(out_path, "w") as f:
-            f.write(review_text)
-        print(f"📝 Stub review saved to {out_path}")
-        sys.exit(0)
-
-    except subprocess.CalledProcessError as e:
-        print("⚠️ `origin/main` not found. Falling back to `git diff HEAD^`.")
+        print("⚠️ `origin/main` not found. Trying HEAD^...")
         try:
             diff = subprocess.check_output(["git", "diff", "HEAD^"]).decode()
             name_part = "git_diff_head_prev"
-        except subprocess.CalledProcessError as e2:
-            print("❌ Git diff failed. No diff available.")
-            sys.exit(1)
+        except subprocess.CalledProcessError:
+            print("❌ Git diff failed. No usable revision history.")
+            # Save stub output so CI doesn't fail
+            review_text = "# Claude Review\n\n⚠️ No diff available — skipping review."
+            timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
+            out_path = f"output/claude_review_nodiff_{timestamp}.md"
+            with open(out_path, "w") as f:
+                f.write(review_text)
+            print(f"📝 Stub review saved to {out_path}")
+            sys.exit(0)
 
     prompt = f'''You are a senior code reviewer. Please review the following GitHub diff and return your structured feedback in **Markdown format**.
 
@@ -80,7 +74,9 @@ except subprocess.CalledProcessError:
 {diff}
 ```'''
 
+# =========================
 # Claude API call
+# =========================
 try:
     response = client.messages.create(
         model=model,
