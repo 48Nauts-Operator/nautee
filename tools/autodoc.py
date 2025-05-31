@@ -95,7 +95,7 @@ for file_path in py_files:
         print(f"✅ Documented: {file_path} → {out_path}")
 
         display_name = os.path.relpath(file_path, start=target_path)
-        index_entries.append(f"- [{display_name}]({filename_md})")
+        index_entries.append(f"- [📄 {display_name}]({filename_md})")
 
     except Exception as e:
         print(f"❌ Error documenting {file_path}: {e}")
