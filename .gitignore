@@ -9,6 +9,7 @@
 output/
 folder_review/
 internal_docs/
+site/
 
 # Python
 __pycache__/
