@@ -1,3 +1,9 @@
+# =========================
+# Review a single file or a git diff
+# Author: André Wolke
+# Date: 2025-05-31
+# Version: 1.0.0
+# =========================
 import os
 import anthropic
 from dotenv import load_dotenv
