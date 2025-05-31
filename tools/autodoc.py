@@ -18,6 +18,29 @@ os.makedirs(output_dir, exist_ok=True)
 with open(os.path.join(output_dir, ".nojekyll"), "w") as f:
     pass
 
+# === Write simple index.html if missing ===
+index_html_path = os.path.join(output_dir, "index.html")
+if not os.path.exists(index_html_path):
+    with open(index_html_path, "w") as f:
+        f.write("""<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <title>Nautee Claude Docs</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; max-width: 720px; margin: auto; }
+    h1 { color: #2b7de9; }
+    ul { padding-left: 1.2rem; }
+  </style>
+</head>
+<body>
+  <h1>📘 Nautee Claude Docs</h1>
+  <p>This site contains auto-generated documentation by Claude from Anthropic.</p>
+  <p><a href="index.md">View Documentation Index</a></p>
+  <p><em>Generated automatically. Last updated: {}</em></p>
+</body>
+</html>""".format(datetime.now().strftime("%Y-%m-%d %H:%M")))
+
 index_path = os.path.join(output_dir, "index.md")
 index_entries = []
 
@@ -70,7 +93,9 @@ for file_path in py_files:
             out_file.write(header + markdown)
 
         print(f"✅ Documented: {file_path} → {out_path}")
-        index_entries.append(f"- [{file_path}](./{filename_md})")
+
+        display_name = os.path.relpath(file_path, start=target_path)
+        index_entries.append(f"- [{display_name}]({filename_md})")
 
     except Exception as e:
         print(f"❌ Error documenting {file_path}: {e}")
