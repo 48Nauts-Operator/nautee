@@ -1,4 +1,4 @@
-name: Auto-Doc External: 137docs
+name: "Auto-Doc External: 137docs"
 
 on:
   schedule:
