@@ -29,4 +29,7 @@ for file_path in files_to_doc:
     timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
     out_path = f"output/autodoc_{filename}_{timestamp}.txt"
 
-    prompt = f"""You are a technical writer. Please generate professional, structured documentation in Markdown format for the following code file:
+    prompt = f'''You are a technical writer. Please generate professional, structured documentation in Markdown format for the following code file:
+    ```python
+    {source_code}
+    ```'''
