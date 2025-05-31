@@ -1,11 +1,79 @@
-<!-- docs/index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="0; url=index.md">
-  <title>Redirecting...</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nautee Claude Docs</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #1f1f2e, #232332);
+      color: #ffffff;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #66d9ef;
+    }
+    p.lead {
+      font-size: 1.2rem;
+      color: #c5c8c6;
+    }
+    .section-title {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      color: #f8f8f2;
+      border-bottom: 2px solid #66d9ef;
+      padding-bottom: 0.25rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    li {
+      margin-bottom: 0.6rem;
+    }
+    a {
+      color: #8be9fd;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 4rem;
+      font-size: 0.8rem;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecting to <a href="index.md">index.md</a></p>
+  <div class="container">
+    <h1>📘 Nautee Claude Docs</h1>
+    <p class="lead">
+      Welcome to the official <strong>Nautee Project</strong> documentation site. All pages here are generated automatically using Claude AI based on your evolving Python codebase.
+    </p>
+
+    <div class="section-title">🔍 Quick Links</div>
+    <ul>
+      <li><a href="index.md">📚 View Documentation Index (Markdown)</a></li>
+      <li><a href="https://github.com/48Nauts-Operator/nautee" target="_blank">🌐 GitHub Repository</a></li>
+    </ul>
+
+    <div class="section-title">📁 Latest Docs Directory</div>
+    <ul>
+      <!-- This part is static. Generated .md files appear in the directory listing. -->
+      <li><code>docs/autodoc_*.md</code> files contain structured Markdown documentation.</li>
+      <li>Each file maps to a single source Python file (e.g. <code>tools/autodoc.py</code>).</li>
+    </ul>
+
+    <footer>
+      Last updated: <script>document.write(new Date().toLocaleString())</script> — Powered by Claude & GitHub Actions
+    </footer>
+  </div>
 </body>
 </html>
