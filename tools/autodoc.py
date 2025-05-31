@@ -1,78 +1,163 @@
+"""
+Autodoc Generator
+
+Scans the project for Python source files, generates Markdown documentation using Claude,
+writes to docs/*.md, and updates mkdocs.yml.
+"""
+
 import os
 import sys
 import anthropic
 from dotenv import load_dotenv
 from datetime import datetime
+import yaml
 
-# === Load .env and Claude Setup ===
+# === Setup ===
+
 load_dotenv()
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 model = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-20250514")
 
-# === Get target path ===
 target_path = sys.argv[1] if len(sys.argv) > 1 else "."
 output_dir = "docs"
 os.makedirs(output_dir, exist_ok=True)
 
-# Ensure .nojekyll exists for GitHub Pages
-with open(os.path.join(output_dir, ".nojekyll"), "w") as f:
-    pass
+mkdocs_yml_path = "mkdocs.yml"
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
 
-# === Write simple index.html if missing ===
-index_html_path = os.path.join(output_dir, "index.html")
-if not os.path.exists(index_html_path):
-    with open(index_html_path, "w") as f:
-        f.write("""<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='UTF-8'>
-  <title>Nautee Claude Docs</title>
-  <style>
-    body { font-family: sans-serif; padding: 2rem; max-width: 720px; margin: auto; }
-    h1 { color: #2b7de9; }
-    ul { padding-left: 1.2rem; }
-  </style>
-</head>
-<body>
-  <h1>📘 Nautee Claude Docs</h1>
-  <p>This site contains auto-generated documentation by Claude from Anthropic.</p>
-  <p><a href="index.md">View Documentation Index</a></p>
-  <p><em>Generated automatically. Last updated: {}</em></p>
-</body>
-</html>""".format(datetime.now().strftime("%Y-%m-%d %H:%M")))
+# === Helpers ===
 
-index_path = os.path.join(output_dir, "index.md")
-index_entries = []
+def snake_md_path(rel_path: str) -> str:
+    return rel_path.replace("/", "_").replace(".", "_") + ".md"
 
-# === Walk all .py files recursively ===
-py_files = []
-for root, _, files in os.walk(target_path):
-    for file in files:
-        if file.endswith(".py") and not file.startswith("test_") and file != "__init__.py":
-            py_files.append(os.path.join(root, file))
+def load_mkdocs_config(path: str):
+    if os.path.exists(path):
+        with open(path, "r") as f:
+            return yaml.safe_load(f)
+    return {
+        "site_name": "Nautee Docs",
+        "theme": {"name": "material"},
+        "nav": []
+    }
 
+def write_mkdocs_config(path: str, static_nav, autodoc_items):
+    full_nav = static_nav + [{"AutoDocs": autodoc_items}]
+    with open(path, "w") as f:
+        yaml.dump({
+            "site_name": "Nautee Docs",
+            "theme": {
+                "name": "material",
+                "palette": [
+                    {
+                        "scheme": "slate",
+                        "primary": "blue",
+                        "accent": "green",
+                        "toggle": {
+                            "icon": "material/weather-sunny",
+                            "name": "Switch to light mode"
+                        }
+                    },
+                    {
+                        "scheme": "default",
+                        "primary": "blue",
+                        "accent": "green",
+                        "toggle": {
+                            "icon": "material/weather-night",
+                            "name": "Switch to dark mode"
+                        }
+                    }
+                ],
+                "font": {
+                    "text": "Roboto",
+                    "code": "Roboto Mono"
+                },
+                "features": [
+                    "navigation.instant",
+                    "navigation.tabs",
+                    "navigation.top",
+                    "content.code.copy",
+                    "content.action.edit",
+                    "content.action.view",
+                    "content.code.annotate",
+                    "search.suggest",
+                    "search.highlight"
+                ]
+            },
+            "markdown_extensions": [
+                "admonition",
+                "codehilite",
+                "footnotes",
+                "meta",
+                {"toc": {"permalink": True}},
+                {"pymdownx.highlight": {"anchor_linenums": True, "linenums": True}},
+                "pymdownx.superfences",
+                "pymdownx.inlinehilite",
+                "pymdownx.details",
+                "pymdownx.snippets",
+                "pymdownx.magiclink",
+                "pymdownx.mark",
+                {"pymdownx.tasklist": {"custom_checkbox": True}},
+                "pymdownx.keys",
+                {"pymdownx.emoji": {
+                    "emoji_generator": "!!python/name:materialx.emoji.to_svg"
+                }}
+            ],
+            "plugins": [
+                "search",
+                {
+                    "mkdocstrings": {
+                        "handlers": {
+                            "python": {
+                                "options": {
+                                    "show_source": True
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            "nav": full_nav
+        }, f, sort_keys=False)
+
+def collect_python_files(base: str):
+    results = []
+    for root, _, files in os.walk(base):
+        for file in files:
+            if file.endswith(".py") and not file.startswith("test_") and file != "__init__.py":
+                results.append(os.path.join(root, file))
+    return results
+
+# === Scan Python Files ===
+
+py_files = collect_python_files(target_path)
 if not py_files:
-    print("⚠️ No Python files found to document.")
+    print("⚠️ No Python files found.")
     sys.exit(0)
 
-print(f"📂 Found {len(py_files)} Python files to document.")
+print(f"📂 Found {len(py_files)} Python files.\n")
 
-# === Loop through each file and document ===
+autodoc_nav = []
+
+# === Generate Docs ===
+
 for file_path in py_files:
     try:
         with open(file_path, "r") as f:
             source_code = f.read()
 
-        rel_path = os.path.relpath(file_path, start=target_path).replace("/", "_").replace(".", "_")
-        timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
-        filename_md = f"autodoc_{rel_path}_{timestamp}.md"
-        out_path = os.path.join(output_dir, filename_md)
+        rel_path = os.path.relpath(file_path, target_path)
+        md_filename = snake_md_path(rel_path)
+        md_output_path = os.path.join(output_dir, md_filename)
 
-        prompt = f'''You are a technical writer. Please generate professional, clear documentation in Markdown format for the following Python code:
+        prompt = f"""You are a technical writer. Generate documentation in Markdown for the following Python file.
+
+Explain what the file does, its purpose, important functions or classes, and give suggestions or notes as needed.
+
+Use headings, bullet points, and code blocks to make it readable.
 
 ```python
 {source_code}
-```'''
+```"""
 
         response = client.messages.create(
             model=model,
@@ -82,27 +167,28 @@ for file_path in py_files:
 
         markdown = response.content[0].text.strip()
 
-        header = (
-            f"<!--\n"
-            f"This documentation was auto-generated by Claude on {timestamp}.\n"
-            f"Source file: {file_path}\n"
-            f"-->\n\n"
-        )
+        with open(md_output_path, "w") as out:
+            out.write(f"<!-- Auto-generated by Claude on {timestamp} -->\n\n")
+            out.write(markdown)
 
-        with open(out_path, "w") as out_file:
-            out_file.write(header + markdown)
-
-        print(f"✅ Documented: {file_path} → {out_path}")
-
-        display_name = os.path.relpath(file_path, start=target_path)
-        index_entries.append(f"- [📄 {display_name}]({filename_md})")
+        print(f"✅ Documented: {rel_path} → {md_filename}")
+        autodoc_nav.append({rel_path.split('/')[-1].replace('.py', ''): md_filename})
 
     except Exception as e:
-        print(f"❌ Error documenting {file_path}: {e}")
+        print(f"❌ Error processing {file_path}: {e}")
 
-# === Write index.md ===
-with open(index_path, "w") as index_file:
-    index_file.write("# 📚 Auto-Generated Documentation Index\n\n")
-    index_file.write("\n".join(index_entries))
+# === Write index.md (if missing) ===
 
-print(f"📘 Index created at: {index_path}")
+index_md_path = os.path.join(output_dir, "index.md")
+if not os.path.exists(index_md_path):
+    with open(index_md_path, "w") as f:
+        f.write("# 📚 Auto-Generated Documentation Index\n\n")
+        f.write("Welcome to your project docs.\n")
+
+# === Update mkdocs.yml ===
+
+existing = load_mkdocs_config(mkdocs_yml_path)
+static_nav = [item for item in existing.get("nav", []) if "AutoDocs" not in item]
+write_mkdocs_config(mkdocs_yml_path, static_nav, autodoc_nav)
+
+print(f"\n🛠️ Updated {mkdocs_yml_path} with {len(autodoc_nav)} AutoDocs entries.")
