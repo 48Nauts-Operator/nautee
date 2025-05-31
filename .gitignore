@@ -8,6 +8,7 @@
 # Project specific folders
 output/
 folder_review/
+internal docs/
 
 # Python
 __pycache__/
