@@ -23,7 +23,9 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install anthropic python-dotenv mkdocs-material
+        run: |
+            pip install anthropic python-dotenv 
+            pip install mkdocs mkdocs-material mkdocstrings mkdocstrings-python
 
       - name: Deploy with MkDocs
         run: mkdocs gh-deploy --force

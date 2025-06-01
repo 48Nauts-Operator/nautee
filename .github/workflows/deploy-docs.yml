@@ -23,7 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install anthropic python-dotenv mkdocs-material mkdocstrings
+          pip install anthropic python-dotenv mkdocs-material
+          pip install mkdocs mkdocs-material mkdocstrings mkdocstrings-python
 
       - name: Run autodoc
         run: |

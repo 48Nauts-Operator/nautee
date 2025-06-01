@@ -1,7 +1,9 @@
 # 🤖 Claude GitHub Assistant (V1)
 
-A lightweight toolset to generate local code reviews using **Claude by Anthropic**.
 [![Docs](https://img.shields.io/badge/📄-View%20Documentation-blue)](https://github.com/48Nauts-Operator/nautee)
+
+A lightweight toolset to generate local code reviews using **Claude by Anthropic**.
+
 ---
 
 ## ✨ Features
@@ -19,16 +21,31 @@ A lightweight toolset to generate local code reviews using **Claude by Anthropic
 
 ```bash
 cp .env.sample .env
+```
 
-	2.	Install dependencies:
+2.	Install dependencies:
 
+```
 pip install anthropic python-dotenv
-
-No requirements.txt is needed yet — you can add one later if needed.
+```
 
 ⸻
 
-🚀 Usage
+3. Configure GitHub
+You need to create 3 secrets in Github --> Settings / Secrets and variables / Actions / New repository secret
+
+A) ANTHROPIC_API_KEY
+B) ANTHROPIC_MODEL
+C) GH_PERSONAL_ACCESS_TOKEN --> Generate a personal access Token with repo + workflow access.
+
+4. Enable Pages
+Go to Settings / Pages and change
+A) Source to `gh-pages` and folder to `root`
+
+It might take 4-5min the first time.
+
+
+# 🚀 Usage
 
 🔹 Review specific files
 
