@@ -52,6 +52,19 @@ def write_index_md(nav_items):
                 f.write(f"- [{title}]({link})\n")
         f.write(f"\n---\n\n_Last updated: {timestamp}_\n")
 
+def append_missing_docs_to_index(nav_items):
+    index_md_path = os.path.join(output_dir, "index.md")
+    existing_links = set(link for item in nav_items for link in item.values())
+
+    with open(index_md_path, "a") as f:
+        f.write("\n## 🗃️ Other Markdown Files\n\n")
+        for root, _, files in os.walk(output_dir):
+            for file in files:
+                if file.endswith(".md") and file != "index.md":
+                    rel_path = os.path.relpath(os.path.join(root, file), output_dir)
+                    if rel_path not in existing_links:
+                        f.write(f"- [{rel_path}]({rel_path})\n")
+
 def write_mkdocs_config(path: str, static_nav, autodoc_items):
     full_nav = static_nav + [{"AutoDocs": autodoc_items}]
     with open(path, "w") as f:
@@ -222,4 +235,5 @@ print("✅ mkdocs.yml updated with latest AutoDocs.")
 
 print("\n📝 Writing index.md with AutoDocs entries...")
 write_index_md(autodoc_nav)
-print("✅ index.md updated.")
+append_missing_docs_to_index(autodoc_nav)
+print("✅ index.md updated with all .md files.")
