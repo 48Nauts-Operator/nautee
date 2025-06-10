@@ -7,16 +7,16 @@ Welcome to the **Nautee Documentation Portal**. This site contains documentation
 
 ---
 
-_Last updated: 2025-06-10 18:29_
+_Last updated: 2025-06-10 19:16_
 
 ## 🗃️ Other Markdown Files
 
 - [generate_docs_py.md](generate_docs_py.md)
-- [tools_autodoc_py.md](tools_autodoc_py.md)
-- [tools_old_autodoc_py.md](tools_old_autodoc_py.md)
-- [tools_claude_folder_review_batched_py.md](tools_claude_folder_review_batched_py.md)
 - [tools_changelog_py.md](tools_changelog_py.md)
+- [tools_autodoc_py.md](tools_autodoc_py.md)
 - [tools_claude_review_py.md](tools_claude_review_py.md)
+- [tools_claude_folder_review_batched_py.md](tools_claude_folder_review_batched_py.md)
 - [tools_claude_folder_review_py.md](tools_claude_folder_review_py.md)
+- [tools_old_autodoc_py.md](tools_old_autodoc_py.md)
 - [internal/auto-dev-loop-concept.md](internal/auto-dev-loop-concept.md)
 - [internal/nautee-concept.md](internal/nautee-concept.md)
