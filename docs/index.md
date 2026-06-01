@@ -7,7 +7,7 @@ Welcome to the **Nautee Documentation Portal**. This site contains documentation
 
 ---
 
-_Last updated: 2026-05-31 18:27_
+_Last updated: 2026-06-01 08:04_
 
 ## 🗃️ Other Markdown Files
 
