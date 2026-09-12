@@ -1,0 +1,47 @@
+name: Deploy Auto-Generated Docs
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 06:00 UTC
+    - cron: '0 18 * * *'  # 18:00 UTC
+  workflow_dispatch:      # Optional: manual trigger
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install anthropic python-dotenv mkdocs-material
+          pip install mkdocs mkdocs-material mkdocstrings mkdocstrings-python
+
+      - name: Run autodoc
+        run: |
+          mkdir -p docs
+          touch docs/.nojekyll
+          python tools/autodoc.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+
+      - name: Commit & Push Changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add docs
+          git diff --cached --quiet || git commit -m "📝 Auto-generated Claude docs"
+          git push
+
+      - name: Deploy MkDocs to GitHub Pages
+        run: mkdocs gh-deploy --clean --force

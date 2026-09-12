@@ -1,0 +1,43 @@
+name: Auto-Doc External Repo
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: 'GitHub repo to document (e.g. 48Nauts-Operator/137docs)'
+        required: true
+        default: '48Nauts-Operator/137docs'
+
+jobs:
+  autodoc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repo (nautee)
+        uses: actions/checkout@v3
+
+      - name: Clone external repo
+        env:
+          GH_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+        run: |
+          echo "📦 Cloning ${{ github.event.inputs.repo }}..."
+          git clone https://$GH_TOKEN@github.com/${{ github.event.inputs.repo }} repos/target
+
+      - name: Install dependencies
+        run: pip install anthropic python-dotenv
+
+      - name: Run autodoc on external repo
+        run: python tools/autodoc.py repos/target
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+
+      - name: Commit & Push Claude Docs
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add docs
+          git commit -m "📘 Claude-generated docs for ${{ github.event.inputs.repo }}"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
