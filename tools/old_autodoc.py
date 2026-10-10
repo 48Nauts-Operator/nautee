@@ -1,9 +1,9 @@
-print("\U0001f441 autodoc.py is executing from:", __file__, flush=True)
+print("👁️ autodoc.py is executing from:", __file__, flush=True)
 """
 Autodoc Generator
 
 Scans the project for Python source files, generates Markdown documentation using Claude,
-writes to docs/*.md, and updates mkdocs.yml and index.md.
+writes to docs/*.md, and updates mkdocs.yml.
 """
 
 import os
@@ -40,30 +40,6 @@ def load_mkdocs_config(path: str):
         "theme": {"name": "material"},
         "nav": []
     }
-
-def write_index_md(nav_items):
-    index_md_path = os.path.join(output_dir, "index.md")
-    with open(index_md_path, "w") as f:
-        f.write("# \U0001f4da Auto-Generated Documentation Index\n\n")
-        f.write("Welcome to the **Nautee Documentation Portal**. This site contains documentation generated automatically by Claude from Anthropic.\n\n")
-        f.write("## \U0001f5c2️ AutoDocs (Generated)\n\n")
-        for item in nav_items:
-            for title, link in item.items():
-                f.write(f"- [{title}]({link})\n")
-        f.write(f"\n---\n\n_Last updated: {timestamp}_\n")
-
-def append_missing_docs_to_index(nav_items):
-    index_md_path = os.path.join(output_dir, "index.md")
-    existing_links = set(link for item in nav_items for link in item.values())
-
-    with open(index_md_path, "a") as f:
-        f.write("\n## 🗃️ Other Markdown Files\n\n")
-        for root, _, files in os.walk(output_dir):
-            for file in files:
-                if file.endswith(".md") and file != "index.md":
-                    rel_path = os.path.relpath(os.path.join(root, file), output_dir)
-                    if rel_path not in existing_links:
-                        f.write(f"- [{rel_path}]({rel_path})\n")
 
 def write_mkdocs_config(path: str, static_nav, autodoc_items):
     full_nav = static_nav + [{"AutoDocs": autodoc_items}]
@@ -199,9 +175,17 @@ Use headings, bullet points, and code blocks to make it readable.
         print(f"✅ Documented: {rel_path} → {md_filename}")
         autodoc_nav.append({rel_path.split('/')[-1].replace('.py', ''): md_filename})
         print("🧭 Appending to autodoc_nav:", {rel_path.split('/')[-1].replace('.py', ''): md_filename})
-
+        
     except Exception as e:
         print(f"❌ Error processing {file_path}: {e}")
+
+# === Write index.md (if missing) ===
+
+index_md_path = os.path.join(output_dir, "index.md")
+if not os.path.exists(index_md_path):
+    with open(index_md_path, "w") as f:
+        f.write("# 📚 Auto-Generated Documentation Index\n\n")
+        f.write("Welcome to your project docs.\n")
 
 # === Update mkdocs.yml ===
 
@@ -226,14 +210,18 @@ for item in autodoc_nav:
 # Combine new nav
 full_nav = static_nav + [{"AutoDocs": autodoc_nav}]
 
-# Write mkdocs.yml
+# Write to file
 print("\n💾 Writing updated mkdocs.yml...")
-write_mkdocs_config(mkdocs_yml_path, static_nav, autodoc_nav)
+with open(mkdocs_yml_path, "w") as f:
+    yaml.dump({
+        "site_name": existing.get("site_name", "Nautee Docs"),
+        "theme": existing.get("theme", {"name": "material"}),
+        "markdown_extensions": existing.get("markdown_extensions", []),
+        "plugins": existing.get("plugins", []),
+        "nav": full_nav
+    }, f, sort_keys=False)
+
 print("✅ mkdocs.yml updated with latest AutoDocs.")
-
-# === Write index.md ===
-
-print("\n📝 Writing index.md with AutoDocs entries...")
-write_index_md(autodoc_nav)
-append_missing_docs_to_index(autodoc_nav)
-print("✅ index.md updated with all .md files.")
+print("\n📄 Final nav section (after):")
+for item in full_nav:
+    print("   ", item)
